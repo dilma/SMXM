@@ -21,7 +21,7 @@ public class ExcelDataReader {
             FileInputStream fileInputStream = new FileInputStream("resources/input/Products_Extract.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet worksheet = workbook.getSheet("Sheet1");
-            
+
 
         }catch (FileNotFoundException e) {
             e.printStackTrace();

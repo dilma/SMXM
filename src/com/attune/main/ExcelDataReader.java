@@ -34,17 +34,17 @@ public class ExcelDataReader {
                 Row row = rowIterator.next();
                 if(count != 0L ){
                     Product product = new Product();
-                    Cell cell1 = row.getCell(0);
-                    if(cell1 != null){
-                        product.setStyle(cell1.getStringCellValue());
+                    Cell cellStyle = row.getCell(0);
+                    if(cellStyle != null){
+                        product.setStyle(cellStyle.getStringCellValue());
                     }
-                    Cell cell2 = row.getCell(1);
-                    if(cell2 != null){
-                        product.setColor(cell2.getStringCellValue());
+                    Cell cellColor = row.getCell(1);
+                    if(cellColor != null){
+                        product.setColor(cellColor.getStringCellValue());
                     }
-                    Cell cell3 = row.getCell(2);
-                    if(cell3 != null){
-                        product.setSize(cell3.getStringCellValue());
+                    Cell cellSize = row.getCell(2);
+                    if(cellSize != null){
+                        product.setSize(cellSize.getStringCellValue());
                     }
                     productList.add(product);
                 }

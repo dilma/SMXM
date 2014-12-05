@@ -18,8 +18,8 @@ import java.util.List;
  */
 public class CSVFileWriter{
 
-    final static String[] header = new String[] { "STYLE","COLOR","SIZE","UPC"};
-    final static String filePath = "C:\\Users\\Mihan.Liyanage\\Desktop\\target\\result.csv";
+    private final static String[] header = new String[] { "STYLE","COLOR","SIZE","UPC"};
+    private final static String filePath = "C:\\Users\\Mihan.Liyanage\\Desktop\\target\\result.csv";
 
     /**
      * File data types with constraints
@@ -27,7 +27,7 @@ public class CSVFileWriter{
      */
     private static CellProcessor[] getProcessors() {
 
-        final CellProcessor[] processors = new CellProcessor[] {
+        CellProcessor[] processors = new CellProcessor[] {
             new NotNull(), //STYLE
             new NotNull(), //COLOR
             new NotNull(), //SIZE
@@ -37,14 +37,21 @@ public class CSVFileWriter{
         return processors;
     }
 
-    public boolean getFileEmptyFlag() throws IOException {
+    /**
+     * Check the file is empty or not
+     * @return empty flag
+     */
+    public boolean getFileEmptyFlag() {
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
+        try{
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
 
-        if (bufferedReader.readLine() == null) {
+            if (bufferedReader.readLine() == null) {
+                return true;
+            }
+        }catch (IOException e){
             return true;
         }
-
         return false;
     }
 
@@ -61,13 +68,13 @@ public class CSVFileWriter{
 
             final CellProcessor[] processors = getProcessors();
 
+            //write the product header
             if(flag){
                 listWriter.writeHeader(header);
             }
 
-            // write the customer lists
+            //write the product lists
             listWriter.write(content, processors);
-
         }finally {
             if( listWriter != null ) {
                 listWriter.close();

@@ -29,27 +29,25 @@ public class ExcelDataReader {
             Long count = 0L;
             while(rowIterator.hasNext()) {
                 Row row = rowIterator.next();
-
-                //For each row, iterate through each columns
-                Iterator<Cell> cellIterator = row.cellIterator();
-                while(cellIterator.hasNext()) {
-
-                    Cell cell = cellIterator.next();
-
-                    switch(cell.getCellType()) {
-                        case Cell.CELL_TYPE_BOOLEAN:
-                            System.out.print(cell.getBooleanCellValue() + "\t");
-                            break;
-                        case Cell.CELL_TYPE_NUMERIC:
-                            System.out.print(cell.getNumericCellValue() + "\t");
-                            break;
-                        case Cell.CELL_TYPE_STRING:
-                            System.out.print(cell.getStringCellValue() + "\t");
-                            break;
+                if(count != 0L ){
+                    Product product = new Product();
+                    Cell cell1 = row.getCell(0);
+                    if(cell1 != null){
+                        product.setStyle(cell1.getStringCellValue());
                     }
+                    Cell cell2 = row.getCell(1);
+                    if(cell2 != null){
+                        product.setColor(cell2.getStringCellValue());
+                    }
+                    Cell cell3 = row.getCell(2);
+                    if(cell3 != null){
+                        product.setSize(cell3.getStringCellValue());
+                    }
+                    productList.add(product);
                 }
-                System.out.println("");
+                count++;
             }
+            System.out.println(productList.size());
             fileInputStream.close();
 
         }catch (FileNotFoundException e) {

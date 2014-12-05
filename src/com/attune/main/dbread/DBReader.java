@@ -13,17 +13,8 @@ import java.util.List;
  * Created by Madhawa.Chandrasena on 12/5/2014.
  */
 public class DBReader {
-    public static void main(String[] args) {
-        DBReader db = new DBReader();
-        Product p = new Product();
-        p.setColor("BLACK LEATHER");
-        p.setSize("10.5");
-        p.setStyle("SERPENT");
-        List<Product> list = new ArrayList<Product>();
-        list.add(p);
-        db.excuteQuery(list);
-    }
-    public void excuteQuery(List<Product> products) {
+
+    public List<Product> getProductsSKU(List<Product> products) {
 
         try {
             Connection con = DBConnection.getConnection();
@@ -37,8 +28,8 @@ public class DBReader {
 
                 if (rs != null) {
                     while (rs.next()) {
-                       String s = rs.getString(1);
-                        System.out.println("sa----"+s);
+                        String s = rs.getString(1);
+                        p.setUpc(s);
                     }
                 }
             }
@@ -47,6 +38,6 @@ public class DBReader {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return products;
     }
 }

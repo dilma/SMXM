@@ -1,5 +1,6 @@
 package com.attune.main;
 
+import com.attune.model.Product;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.constraint.UniqueHashCode;
 import org.supercsv.cellprocessor.ift.CellProcessor;
@@ -19,7 +20,7 @@ import java.util.List;
 public class CSVFileWriter{
 
     private final static String[] header = new String[] { "STYLE","COLOR","SIZE","UPC"};
-    private final static String filePath = "C:\\Users\\Mihan.Liyanage\\Desktop\\target\\result.csv";
+    private final static String filePath = "resources/output/result.csv";
 
     /**
      * File data types with constraints
@@ -59,7 +60,7 @@ public class CSVFileWriter{
      * Write content of the product object to csv file
      * @throws Exception Files related exceptions
      */
-    public static void writeCSVFile(List<Object> content, boolean flag) throws Exception {
+    public static void writeCSVFile(List<Product> content, boolean flag) throws Exception {
 
         ICsvListWriter listWriter = null;
 
@@ -74,7 +75,10 @@ public class CSVFileWriter{
             }
 
             //write the product lists
-            listWriter.write(content, processors);
+            for(Product p:content){
+                listWriter.write(p.getStyle(),p.getColor(),p.getSize(),p.getUpc());
+            }
+
         }finally {
             if( listWriter != null ) {
                 listWriter.close();

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class ExcelDataReader {
 
-    public List<Product> readData(){
+    public List<Product> readProductData(){
         List<Product> productList = new ArrayList<Product>();
         try {
             FileInputStream fileInputStream = new FileInputStream("resources/input/Products_Extract.xlsx");
@@ -47,7 +47,6 @@ public class ExcelDataReader {
                 }
                 count++;
             }
-            System.out.println(productList.size());
             fileInputStream.close();
 
         }catch (FileNotFoundException e) {

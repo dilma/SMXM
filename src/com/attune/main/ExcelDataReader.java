@@ -4,6 +4,7 @@ import com.attune.model.Product;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.util.IOUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
@@ -20,8 +21,10 @@ public class ExcelDataReader {
 
     public List<Product> readProductData(){
         List<Product> productList = new ArrayList<Product>();
+        FileInputStream fileInputStream = null;
+
         try {
-            FileInputStream fileInputStream = new FileInputStream("resources/input/Products_Extract.xlsx");
+            fileInputStream = new FileInputStream("resources/input/Products_Extract.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
             Sheet worksheet = workbook.getSheet("Sheet1");
 
@@ -54,6 +57,8 @@ public class ExcelDataReader {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            IOUtils.closeQuietly(fileInputStream);
         }
 
         return productList;

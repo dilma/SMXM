@@ -13,8 +13,7 @@ public class Main {
             List<Product> list = reader.readProductData();
             CSVFileWriter fileWriter = new CSVFileWriter();
             DBReader dbReader = new DBReader();
-            boolean flag = fileWriter.getFileEmptyFlag();
-            fileWriter.writeCSVFile(dbReader.getProductsSKU(list), flag);
+            fileWriter.writeCSVFile(dbReader.getProductsSKU(list));
         } catch (Exception e) {
             e.printStackTrace();
         }
